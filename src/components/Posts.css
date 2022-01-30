@@ -1,0 +1,36 @@
+/* .posts{
+
+} */
+
+.delete {
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: red;
+  }
+  
+  .itemInput {
+    margin-bottom: 10px;
+  }
+  .users {
+    width: 50%;
+    background-color: rgb(99, 214, 218);
+    margin: 15px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  .post {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 5px;
+    border: 2px solid azure;
+    margin: 5px;
+    background-color: powderblue;
+  }
+  
+  .actionBtn {
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 10px;
+  }

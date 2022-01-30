@@ -6,7 +6,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
-} from "firebase/firestore/";
+} from "firebase/firestore";
 import {
   getAuth,
   signInWithPopup,
@@ -26,12 +26,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 //Authentication
 export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
-export const loginConGoogle = () => signInWithPopup(auth, provider);
+export const logInWithGoogle = () => signInWithPopup(auth, provider);
 export const logout = () => signOut(auth);
 
 /**
@@ -64,7 +64,7 @@ export async function deletePost(id) {
 /**
  * Updates a post by its id
  * @param {string} id Post Id to update
- * @param {object} newData        
+ * @param {object} newData
  */
 export async function updatePost(id, newData) {
   const userRef = doc(db, "posts", id);
