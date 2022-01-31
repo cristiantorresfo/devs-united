@@ -1,9 +1,15 @@
-import "./Posts.css"
+import "./Posts.css";
 import { addPost, deletePost, updatePost } from "../firebase";
 import corazon from "../corazon.svg";
 
-function Posts({ posts, setPosts, newPost, setNewPost, INITIAL_FORM_DATA, userLog }) {
-
+function Posts({
+  posts,
+  setPosts,
+  newPost,
+  setNewPost,
+  INITIAL_FORM_DATA,
+  userLog,
+}) {
   const handleChange = (e) => {
     const newPost = {
       message: e.target.value,

@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+.initialContainer{
+    
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.user-profile button {
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.user-profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.LogIn{
+    display: flex;
+    cursor: pointer;
+}
+
+.LogInGoogle p:first-child{
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 3.125rem;
+    color: #fff;
+}
+
+.LogInGoogle p:nth-child(2){
+    font-family: 'Fira Code', monospace;
+    font-weight: 450;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: #fff;
+}
+
+.LogInGoogle p:last-child{
+    font-family: 'Fira Code', monospace;
+    font-weight: 450;
+    font-size: 1.125rem;
+    color: #60265B;
+}
+
+.login-btn {
+    width: 22.9375rem;
+    height: 3.625rem;
+    background-color: #4285F4;
+    border-radius: 0px 5px 5px 0px;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    border: #4285F4;
+    cursor: pointer;
+}
+
+.login-btn:hover{
+    background-color: #5793f3;
+}
+.googleLogo{
+    background-color: #fff;
+    width: 3.6513rem;
+    height: 3.625rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px 0px 0px 5px;
+    border: solid 3px #4285F4;
+}

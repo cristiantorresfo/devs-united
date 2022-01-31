@@ -1,17 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
-import {
-  db,
-  addPost,
-  auth,
-  deletePost,
-  updatePost,
-  logout,
-  loginConGoogle,
-} from "./firebase";
+import { db, auth } from "./firebase";
 import Posts from "./components/Posts";
-import LogInGoogle from "./components/LogInGoogle";
+import LogIn from "./components/LogIn";
 
 const INITIAL_FORM_DATA = {
   message: "",
@@ -58,7 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      <LogInGoogle userLog={userLog}/>
+      <LogIn userLog={userLog} />
       {userLog.uid.length !== 0 ? (
         <Posts
           posts={posts}
