@@ -1,3 +1,4 @@
+import ColorPicker from "./ColorPicker";
 import "./WelcomeUsername.css";
 
 function WelcomeUsername() {
@@ -6,14 +7,7 @@ function WelcomeUsername() {
       <p>Welcome Name</p>
       <input type="text" name="" placeholder="Type your username" />
       <p>Select your favorite color</p>
-      <div className="usernameColor">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <ColorPicker/>
       <button className="welcomeButton">Continue</button>
     </div>
   );

@@ -1,17 +1,16 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import "./App.css";
+import { ColorProvider } from "./contexts/ColorContext";
 import { auth, db } from "./firebase";
 import Feed from "./pages/Feed";
 import LoggedOut from "./pages/LoggedOut";
 import Welcome from "./pages/Welcome";
 
-
 const USER_INITIAL = {
   uid: "",
 };
 function App() {
-  
   const [userLog, setUserLog] = useState(USER_INITIAL);
   const [posts, setPosts] = useState([]);
 
@@ -41,22 +40,19 @@ function App() {
       unsub();
       unsubscribeAuth();
     };
-  }, [ setUserLog])
+  }, [setUserLog]);
 
-  console.log(userLog)
   return (
-    <div className="App">
-     
-     {userLog.uid.length === 0 ? (
-       <LoggedOut/>
-
-     ):(
-     <Feed userLog={userLog} setPosts={setPosts} posts={posts} />       
-     )}
-          
-
-
-    </div>
+    <ColorProvider>
+      <div className="App">
+        {userLog.uid.length === 0 ? (
+          <LoggedOut />
+        ) : (
+          <Feed userLog={userLog} setPosts={setPosts} posts={posts} />
+        )}
+        <Welcome />
+      </div>
+    </ColorProvider>
   );
 }
 

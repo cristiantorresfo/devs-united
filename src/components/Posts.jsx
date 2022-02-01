@@ -1,11 +1,13 @@
 import "./Posts.css";
-import {auth, db, deletePost, updatePost } from "../firebase";
+import { deletePost, updatePost } from "../firebase";
 import corazon from "../corazon.svg";
-import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { ColorContext } from "../contexts/ColorContext";
+import { useContext } from "react";
 
 
 function Posts({userLog, setPosts, posts}) {
+
+  const { color } = useContext(ColorContext);
 
 
   const handlerDelete = (e) => {
@@ -27,7 +29,7 @@ function Posts({userLog, setPosts, posts}) {
       <div className="posts">
         {posts.map((post) => {
           return (
-            <div className="post" key={post.id}>
+            <div className="post" style={{backgroundColor: color.hex}} key={post.id}>
               <div className="userMessage">
                 <h3>{post.message}</h3>
                 <p>{post.autor}</p>

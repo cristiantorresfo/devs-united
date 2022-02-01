@@ -1,0 +1,12 @@
+.usernameColor {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.usernameColor div {
+    width:3.6725rem ;
+    height: 3.625rem;
+    margin-right: 0.9375rem;
+
+}
