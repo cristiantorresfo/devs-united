@@ -5,38 +5,9 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 
 
-function Posts({userLog, setUserLog, USER_INITIAL}) {
-
-  const [posts, setPosts] = useState([]);
+function Posts({userLog, setPosts, posts}) {
 
 
-  useEffect(() => {
-    const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
-      const postsData = snapshot.docs.map(
-        (doc) => {
-          return {
-            message: doc.data().message,
-            id: doc.id,
-            likes: doc.data().likes,
-            autor: doc.data().autor,
-            email: doc.data().email,
-            uid: doc.data().uid,
-          };
-        },
-        (error) => {
-          console.log(error, "error de escucha");
-        }
-      );
-      setPosts(postsData);
-    });
-    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
-      setUserLog(user || USER_INITIAL);
-    });
-    return () => {
-      unsub();
-      unsubscribeAuth();
-    };
-  }, []);
   const handlerDelete = (e) => {
     deletePost(e.target.id).then((id) => {
       const newPosts = posts.filter((post) => {
