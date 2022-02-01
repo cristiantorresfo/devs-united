@@ -1,31 +1,42 @@
 import "./Posts.css";
-import { addPost, deletePost, updatePost } from "../firebase";
+import {auth, db, deletePost, updatePost } from "../firebase";
 import corazon from "../corazon.svg";
+import { useEffect, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
 
-function Posts({
-  posts,
-  setPosts,
-  newPost,
-  setNewPost,
-  INITIAL_FORM_DATA,
-  userLog,
-}) {
-  const handleChange = (e) => {
-    const newPost = {
-      message: e.target.value,
-      email: userLog.email,
-      uid: userLog.uid,
-      autor: userLog.displayName,
-    };
-    setNewPost(newPost);
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addPost(newPost).then(() => {
-      setNewPost(INITIAL_FORM_DATA);
+function Posts({userLog, setUserLog, USER_INITIAL}) {
+
+  const [posts, setPosts] = useState([]);
+
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
+      const postsData = snapshot.docs.map(
+        (doc) => {
+          return {
+            message: doc.data().message,
+            id: doc.id,
+            likes: doc.data().likes,
+            autor: doc.data().autor,
+            email: doc.data().email,
+            uid: doc.data().uid,
+          };
+        },
+        (error) => {
+          console.log(error, "error de escucha");
+        }
+      );
+      setPosts(postsData);
     });
-  };
+    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      setUserLog(user || USER_INITIAL);
+    });
+    return () => {
+      unsub();
+      unsubscribeAuth();
+    };
+  }, []);
   const handlerDelete = (e) => {
     deletePost(e.target.id).then((id) => {
       const newPosts = posts.filter((post) => {
@@ -41,22 +52,7 @@ function Posts({
     });
   };
   return (
-    <div>
-      <h1>Hello USERS</h1>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          rows="4"
-          cols="30"
-          className="itemInput"
-          onChange={handleChange}
-          type="text"
-          placeholder="Message here..."
-          value={newPost.message}
-        />
-
-        <br />
-        <button>Enviar</button>
-      </form>
+    <div className="formPosts">
       <div className="posts">
         {posts.map((post) => {
           return (

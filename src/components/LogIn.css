@@ -1,14 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
-.initialContainer{
-    
+
+
+
+.LogInGoogle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .user-profile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -21,7 +25,8 @@
     border-radius: 50%;
     margin-right: 10px;
 }
-.LogIn{
+
+.LogIn {
     display: flex;
     cursor: pointer;
 }
