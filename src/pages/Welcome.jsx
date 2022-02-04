@@ -2,12 +2,11 @@ import "./Welcome.css"
 import DevsLogo from "../components/DevsLogo";
 import WelcomeUsername from "../components/WelcomeUsername";
 
-function Welcome() {
+function Welcome({userLog, setNextPage, username, setUsername}) {
   return (
     <div className="initialContainer">
-        <p>hola</p>
       <DevsLogo/>
-      <WelcomeUsername/>
+      <WelcomeUsername userlog={userLog} setNextPage={setNextPage} setUsername={setUsername} username={username}/>
     </div>
   );
 }

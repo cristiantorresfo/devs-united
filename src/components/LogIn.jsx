@@ -17,11 +17,3 @@ function LogIn() {
   )
   }
 export default LogIn;
-
-// userLog.uid.length !== 0 ? (
-//   <div className="user-profile">
-//     <img src={userLog.photoURL} alt="" />
-//     <p>¡Hola {userLog.displayName}!</p>
-//     <button onClick={logout}>Log out</button>
-//   </div>
-// )

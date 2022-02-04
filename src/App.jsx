@@ -13,6 +13,8 @@ const USER_INITIAL = {
 function App() {
   const [userLog, setUserLog] = useState(USER_INITIAL);
   const [posts, setPosts] = useState([]);
+  const [nextPage, setNextPage] = useState(false);
+  const [username, setUsername] = useState("")
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -24,7 +26,8 @@ function App() {
             likes: doc.data().likes,
             autor: doc.data().autor,
             email: doc.data().email,
-            uid: doc.data().uid,
+            uid: doc.data().uid
+            
           };
         },
         (error) => {
@@ -40,17 +43,21 @@ function App() {
       unsub();
       unsubscribeAuth();
     };
-  }, [setUserLog]);
+  }, []);
+
+  console.log(userLog);
 
   return (
     <ColorProvider>
       <div className="App">
         {userLog.uid.length === 0 ? (
-          <LoggedOut />
+          <LoggedOut setNextPage={setNextPage}/>
+          
+        ) : nextPage ? (
+          <Feed userLog={userLog} setPosts={setPosts} posts={posts} username={username} />
         ) : (
-          <Feed userLog={userLog} setPosts={setPosts} posts={posts} />
+          <Welcome userLog={userLog} setNextPage={setNextPage} setUsername={setUsername} username={username} />
         )}
-        <Welcome />
       </div>
     </ColorProvider>
   );

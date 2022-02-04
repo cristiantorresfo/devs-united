@@ -7,8 +7,9 @@ const INITIAL_FORM_DATA = {
   uid: "",
   autor: "",
 };
-function TypingField({ userLog }) {
+function TypingField({ userLog, username}) {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
+
 
   const handleChange = (e) => {
     setNewPost(() => {
@@ -16,7 +17,7 @@ function TypingField({ userLog }) {
         message: e.target.value,
         email: userLog.email,
         uid: userLog.uid,
-        autor: userLog.displayName,
+        autor: userLog.displayName
       };
     });
   };
@@ -29,8 +30,8 @@ function TypingField({ userLog }) {
   };
   return (
     <div className="user-profile">
-      <img className="user-profile-pic" src={userLog.photoURL} alt="" />
-      <p>¡Hola {userLog.displayName}!</p>
+      <p>{username}</p>
+      <img src={userLog.photoURL} alt="photoUser" />
       <button onClick={logout}>Log out</button>
       <form onSubmit={handleSubmit}>
         <textarea

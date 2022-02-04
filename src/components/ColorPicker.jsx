@@ -8,7 +8,6 @@ function ColorPicker() {
   const colorOption = (color) => {
     const handleClickColor = () => {
       setColor(color);
-      console.log(color);
     };
     return (
       <div

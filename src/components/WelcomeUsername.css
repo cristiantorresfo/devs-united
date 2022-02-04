@@ -18,31 +18,3 @@
     margin-right: 0.9375rem;
 
 }
-.usernameColor div:first-child{
-    background-color: #F50D5A ;
-}
-.usernameColor div:nth-child(2){
-    background-color: #FF865C;
-}
-
-.usernameColor div:nth-child(3){
-    background-color: #FFEA5C;
-}
-
-.usernameColor div:nth-child(4){
-    background-color: #00DA76;
-}
-
-.usernameColor div:nth-child(5){
-    background-color: #0096CE
-    ;
-}
-.usernameColor div:last-child{
-    background-color: #800FFF;
-    margin-right: 0;
-}
-
-.welcomeButton {
-    background-color: #00DA76
-    ;
-}
