@@ -1,12 +1,42 @@
 import "./Posts.css";
-import { deletePost, updatePost } from "../firebase";
-import corazon from "../corazon.svg";
-import { ColorContext } from "../contexts/ColorContext";
-import { useContext, useState } from "react";
+import { db, deletePost, updatePost } from "../../firebase";
+import corazon from "../../corazon.svg";
+import { ColorContext } from "../../contexts/ColorContext";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { PostsContext } from "../../contexts/PostsContext";
+import { collection, onSnapshot } from "firebase/firestore";
 
-function Posts({ userLog, setPosts, posts, username }) {
+function Posts({ username }) {
   const { color } = useContext(ColorContext);
+  const { userLog } = useContext(UserContext);
+  const { posts, setPosts } = useContext(PostsContext);
   const [like, setLike] = useState();
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
+      const postsData = snapshot.docs.map(
+        (doc) => {
+          return {
+            message: doc.data().message,
+            id: doc.id,
+            likes: doc.data().likes,
+            autor: doc.data().autor,
+            email: doc.data().email,
+            uid: doc.data().uid,
+          };
+        },
+        (error) => {
+          console.log(error, "error de escucha");
+        }
+      );
+      setPosts(postsData);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [setPosts]);
 
   const handlerDelete = (e) => {
     deletePost(e.target.id).then((id) => {
@@ -21,7 +51,7 @@ function Posts({ userLog, setPosts, posts, username }) {
     !like
       ? updatePost(id, { likes: likes + 1 })
       : updatePost(id, { likes: likes - 1 });
-    setLike(!like)
+    setLike(!like);
     console.log(like);
   };
   return (
@@ -35,7 +65,6 @@ function Posts({ userLog, setPosts, posts, username }) {
               key={post.id}
             >
               <div className="userMessage">
-                <p>{post.username}</p>
                 <h3>{post.message}</h3>
                 <p>{post.autor}</p>
                 <p>{post.email}</p>

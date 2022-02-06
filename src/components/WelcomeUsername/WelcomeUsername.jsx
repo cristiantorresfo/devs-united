@@ -1,10 +1,13 @@
-import ColorPicker from "./ColorPicker";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import ColorPicker from "../ColorPicker/ColorPicker";
 import "./WelcomeUsername.css";
 
-function WelcomeUsername({ userlog, setNextPage, username, setUsername }) {
+function WelcomeUsername({ setNextPage, username, setUsername }) {
+  const { userLog } = useContext(UserContext);
+
   const handleUsername = (e) => {
     setUsername(e.target.value);
-    console.log(username);
   };
 
   const handleContinueBtn = () => {
@@ -12,7 +15,7 @@ function WelcomeUsername({ userlog, setNextPage, username, setUsername }) {
   };
   return (
     <div className="welcomeName">
-      <p>Welcome {userlog.displayName.toUpperCase()}</p>
+      <p>Welcome {userLog.displayName}</p>
       <input
         type="text"
         name="username"

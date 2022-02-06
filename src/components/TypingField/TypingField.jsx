@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { addPost, logout } from "../firebase";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { addPost, logout } from "../../firebase";
 
 const INITIAL_FORM_DATA = {
   message: "",
@@ -7,9 +8,9 @@ const INITIAL_FORM_DATA = {
   uid: "",
   autor: "",
 };
-function TypingField({ userLog, username}) {
+function TypingField({ username }) {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
-
+  const { userLog } = useContext(UserContext);
 
   const handleChange = (e) => {
     setNewPost(() => {
@@ -17,7 +18,7 @@ function TypingField({ userLog, username}) {
         message: e.target.value,
         email: userLog.email,
         uid: userLog.uid,
-        autor: userLog.displayName
+        autor: userLog.displayName,
       };
     });
   };

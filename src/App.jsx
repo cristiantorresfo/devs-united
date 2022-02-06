@@ -1,64 +1,38 @@
-import { collection, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import "./App.css";
 import { ColorProvider } from "./contexts/ColorContext";
-import { auth, db } from "./firebase";
-import Feed from "./pages/Feed";
-import LoggedOut from "./pages/LoggedOut";
-import Welcome from "./pages/Welcome";
+import { UserContext } from "./contexts/UserContext";
+import { auth } from "./firebase";
+import Feed from "./pages/Feed/Feed";
+import LoggedOut from "./pages/LoggedOut/LoggedOut";
+import Welcome from "./pages/Welcome/Welcome";
 
-const USER_INITIAL = {
-  uid: "",
-};
+
 function App() {
-  const [userLog, setUserLog] = useState(USER_INITIAL);
-  const [posts, setPosts] = useState([]);
   const [nextPage, setNextPage] = useState(false);
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState("");
+  const {userLog} = useContext(UserContext)
 
-  useEffect(() => {
-    const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
-      const postsData = snapshot.docs.map(
-        (doc) => {
-          return {
-            message: doc.data().message,
-            id: doc.id,
-            likes: doc.data().likes,
-            autor: doc.data().autor,
-            email: doc.data().email,
-            uid: doc.data().uid
-            
-          };
-        },
-        (error) => {
-          console.log(error, "error de escucha");
-        }
-      );
-      setPosts(postsData);
-    });
+  const {setUserLog, USER_INITIAL} = useContext(UserContext)
+
+  useEffect(()=>{
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
       setUserLog(user || USER_INITIAL);
-    });
-    return () => {
-      unsub();
-      unsubscribeAuth();
-    };
-  }, []);
-
-  console.log(userLog);
+    })
+      return () => {unsubscribeAuth()}
+  },[USER_INITIAL, setUserLog])
 
   return (
-    <ColorProvider>
-      <div className="App">
-        {userLog.uid.length === 0 ? (
-          <LoggedOut setNextPage={setNextPage}/>
-          
-        ) : nextPage ? (
-          <Feed userLog={userLog} setPosts={setPosts} posts={posts} username={username} />
-        ) : (
-          <Welcome userLog={userLog} setNextPage={setNextPage} setUsername={setUsername} username={username} />
-        )}
-      </div>
+    <ColorProvider>      
+          <div className="App">
+            {userLog.uid.length === 0 ? (
+              <LoggedOut setNextPage={setNextPage}/>
+            ) : nextPage ? (
+              <Feed username={username}/>
+            ) : (
+              <Welcome username={username} setUsername={setUsername} setNextPage={setNextPage} />
+            )}
+          </div>
     </ColorProvider>
   );
 }

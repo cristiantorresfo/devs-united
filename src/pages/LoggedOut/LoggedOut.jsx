@@ -1,9 +1,11 @@
 import "./LoggedOut.css"
-import LogIn from "../components/LogIn";
-import DevsLogo from "../components/DevsLogo";
+import LogIn from "../../components/Login/LogIn";
+import DevsLogo from "../../components/DevsLogo/DevsLogo";
+
 
 function LoggedOut({setNextPage}) {
-  return (
+
+   return (
     <div className="initialContainer">
       <DevsLogo/>
       <LogIn />
