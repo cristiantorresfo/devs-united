@@ -1,5 +1,6 @@
 import "./LogIn.css";
 import { logInWithGoogle } from "../../firebase";
+import { Link } from "react-router-dom";
 
 function LogIn() {
   return (
@@ -10,7 +11,9 @@ function LogIn() {
         <div className="googleLogo">
           <img src="./images/googleLogo.svg" alt="" />
         </div>
+        <Link to="/welcome" >
         <button className="login-btn">Log in with Google</button>
+        </Link>
       </div>
       <p>© 2022 Devs_United - BETA</p>
     </div>

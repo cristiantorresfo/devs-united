@@ -1,17 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { ColorProvider } from "./contexts/ColorContext";
 import { PostsProvider } from "./contexts/PostsContext";
 import { UserProvider } from "./contexts/UserContext";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <PostsProvider>
-    <UserProvider>
-      <App />
-    </UserProvider>
-    </PostsProvider>
+    <BrowserRouter>
+      <PostsProvider>
+        <UserProvider>
+          <ColorProvider>
+            <App />
+          </ColorProvider>
+        </UserProvider>
+      </PostsProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

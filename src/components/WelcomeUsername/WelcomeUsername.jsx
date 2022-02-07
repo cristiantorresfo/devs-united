@@ -1,18 +1,16 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import "./WelcomeUsername.css";
 
-function WelcomeUsername({ setNextPage, username, setUsername }) {
+function WelcomeUsername() {
   const { userLog } = useContext(UserContext);
 
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
+  // const handleUsername = (e) => {
+  //   setUsername(e.target.value);
+  // };
 
-  const handleContinueBtn = () => {
-    setNextPage(true);
-  };
   return (
     <div className="welcomeName">
       <p>Welcome {userLog.displayName}</p>
@@ -20,14 +18,15 @@ function WelcomeUsername({ setNextPage, username, setUsername }) {
         type="text"
         name="username"
         placeholder="Type your username"
-        onChange={handleUsername}
-        value={username}
+        // onChange={handleUsername}
+        // value={username}
       />
       <p>Select your favorite color</p>
       <ColorPicker />
-      <button className="welcomeButton" onClick={handleContinueBtn}>
-        Continue
-      </button>
+      <Link to="/feed">
+        <button className="welcomeButton">Continue</button>
+      </Link>
+      ;
     </div>
   );
 }

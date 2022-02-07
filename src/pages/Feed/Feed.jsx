@@ -1,11 +1,11 @@
 import Posts from "../../components/Posts/Posts";
 import TypingField from "../../components/TypingField/TypingField";
 
-function Feed({ username }) {
+function Feed() {
   return (
     <div>
-      <TypingField username={username} />
-      <Posts username={username} />
+      <TypingField  />
+      <Posts  />
     </div>
   );
 }

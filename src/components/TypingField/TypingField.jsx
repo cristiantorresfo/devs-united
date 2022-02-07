@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { addPost, logout } from "../../firebase";
 
@@ -8,7 +9,7 @@ const INITIAL_FORM_DATA = {
   uid: "",
   autor: "",
 };
-function TypingField({ username }) {
+function TypingField() {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
   const { userLog } = useContext(UserContext);
 
@@ -31,9 +32,11 @@ function TypingField({ username }) {
   };
   return (
     <div className="user-profile">
-      <p>{username}</p>
       <img src={userLog.photoURL} alt="photoUser" />
-      <button onClick={logout}>Log out</button>
+      <Link to="/">
+        <button onClick={logout}>Log out</button>
+      </Link>
+
       <form onSubmit={handleSubmit}>
         <textarea
           rows="4"

@@ -3,13 +3,13 @@ import LogIn from "../../components/Login/LogIn";
 import DevsLogo from "../../components/DevsLogo/DevsLogo";
 
 
-function LoggedOut({setNextPage}) {
+function LoggedOut() {
 
    return (
     <div className="initialContainer">
       <DevsLogo/>
       <LogIn />
-      {setNextPage(false)}
+      {/* {setNextPage(false)} */}
     </div>
   );
 }

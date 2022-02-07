@@ -7,7 +7,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
 import { collection, onSnapshot } from "firebase/firestore";
 
-function Posts({ username }) {
+function Posts() {
   const { color } = useContext(ColorContext);
   const { userLog } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostsContext);
