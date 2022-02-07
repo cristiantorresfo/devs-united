@@ -2,7 +2,7 @@ import "./Posts.css";
 import { db, deletePost, updatePost } from "../../firebase";
 
 import { ColorContext } from "../../contexts/ColorContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -11,7 +11,6 @@ function Posts({ username }) {
   const { color } = useContext(ColorContext);
   const { userLog } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostsContext);
-  const [like, setLike] = useState(false);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -48,22 +47,25 @@ function Posts({ username }) {
     });
   };
 
-  const likePost = (id, fav, likes = 0, uid) => (e) => {
-    const favorite = "./images/corazonFav.svg"
-    const unFav = "./images/corazonUnFav.svg"
-   
-    id === e.target.alt &&
-    !fav ? (e.target.src = favorite) : (e.target.src = unFav)
-    id === e.target.alt &&
-      (!fav ? updatePost(id, { fav: true, likes: likes +1}) : updatePost(id, { fav: false, likes: likes -1 }));
+  const likePost =
+    (id, fav, likes = 0, uid) =>
+    (e) => {
+      const favorite = "./images/corazonFav.svg";
+      const unFav = "./images/corazonUnFav.svg";
 
-    
+      id === e.target.alt && !fav
+        ? (e.target.src = favorite)
+        : (e.target.src = unFav);
+      id === e.target.alt &&
+        (!fav
+          ? updatePost(id, { fav: true, likes: likes + 1 })
+          : updatePost(id, { fav: false, likes: likes - 1 }));
 
-    // !like
-    //   ? updatePost(id, { likes: likes + 1 })
-    //   : updatePost(id, { likes: likes - 1 });
-    // console.log(like);
-  };
+      // !like
+      //   ? updatePost(id, { likes: likes + 1 })
+      //   : updatePost(id, { likes: likes - 1 });
+      // console.log(like);
+    };
   return (
     <div className="formPosts">
       <div className="posts">
@@ -92,11 +94,15 @@ function Posts({ username }) {
 
                 <img
                   height="13px"
-                  src={post.fav ? "./images/corazonFav.svg" : "./images/corazonUnFav.svg"}
+                  src={
+                    post.fav
+                      ? "./images/corazonFav.svg"
+                      : "./images/corazonUnFav.svg"
+                  }
                   alt={post.id}
                   onClick={likePost(post.id, post.fav, post.likes, post.uid)}
                 />
-                <span>{post.likes ? post.likes : 0}</span> 
+                <span>{post.likes ? post.likes : 0}</span>
               </div>
             </div>
           );

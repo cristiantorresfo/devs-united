@@ -10,7 +10,6 @@ import Welcome from "./pages/Welcome/Welcome";
 
 function App() {
   const [nextPage, setNextPage] = useState(false);
-  const [username, setUsername] = useState("");
   const {userLog} = useContext(UserContext)
 
   const {setUserLog, USER_INITIAL} = useContext(UserContext)
@@ -28,9 +27,9 @@ function App() {
             {userLog.uid.length === 0 ? (
               <LoggedOut setNextPage={setNextPage}/>
             ) : nextPage ? (
-              <Feed username={username}/>
+              <Feed />
             ) : (
-              <Welcome username={username} setUsername={setUsername} setNextPage={setNextPage} />
+              <Welcome  setNextPage={setNextPage} />
             )}
           </div>
     </ColorProvider>
