@@ -81,3 +81,12 @@
     border-radius: 5px 0px 0px 5px;
     border: solid 3px #4285F4;
 }
+
+.continueBtn{
+    width: 26.5625rem;
+    height: 4.1875rem;
+    background-color: #00DA76;
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.5rem;
+}

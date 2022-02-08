@@ -24,7 +24,8 @@ function WelcomeUsername() {
       <p>Select your favorite color</p>
       <ColorPicker />
       <Link to="/feed">
-        <button className="welcomeButton">Continue</button>
+        <br />
+        <button className="continueBtn">Continue</button>
       </Link>
       ;
     </div>
