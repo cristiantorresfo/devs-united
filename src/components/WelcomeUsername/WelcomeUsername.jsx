@@ -8,17 +8,16 @@ function WelcomeUsername() {
   const { userLog } = useContext(UserContext);
 
   // const handleUsername = (e) => {
-  //   setUsername(e.target.value);
   // };
 
   return (
     <div className="welcomeName">
-      <p>Welcome {userLog.displayName}</p>
+      <p>Welcome <span>{userLog.displayName}</span></p>
       <input
         type="text"
         name="username"
         placeholder="Type your username"
-        // onChange={handleUsername}
+        //onChange={handleUsername}
         // value={username}
       />
       <p>Select your favorite color</p>

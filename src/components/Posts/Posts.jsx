@@ -24,6 +24,7 @@ function Posts() {
             autor: doc.data().autor,
             email: doc.data().email,
             uid: doc.data().uid,
+            username: doc.data().username,
           };
         },
         (error) => {
@@ -47,25 +48,13 @@ function Posts() {
     });
   };
 
-  const likePost =
-    (id, fav, likes = 0, uid) =>
-    (e) => {
-      const favorite = "./images/corazonFav.svg";
-      const unFav = "./images/corazonUnFav.svg";
-
-      id === e.target.alt && !fav
-        ? (e.target.src = favorite)
-        : (e.target.src = unFav);
-      id === e.target.alt &&
-        (!fav
+  const likePost = (id, fav, likes = 0) =>  {
+      
+           (!fav
           ? updatePost(id, { fav: true, likes: likes + 1 })
           : updatePost(id, { fav: false, likes: likes - 1 }));
-
-      // !like
-      //   ? updatePost(id, { likes: likes + 1 })
-      //   : updatePost(id, { likes: likes - 1 });
-      // console.log(like);
     };
+
   return (
     <div className="formPosts">
       <div className="posts">
@@ -100,7 +89,7 @@ function Posts() {
                       : "./images/corazonUnFav.svg"
                   }
                   alt={post.id}
-                  onClick={likePost(post.id, post.fav, post.likes, post.uid)}
+                  onClick={() =>likePost(post.id, post.fav, post.likes, post.uid)}
                 />
                 <span>{post.likes ? post.likes : 0}</span>
               </div>

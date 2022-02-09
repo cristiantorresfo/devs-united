@@ -8,11 +8,11 @@ import LoggedOut from "./pages/LoggedOut/LoggedOut";
 import Welcome from "./pages/Welcome/Welcome";
 
 function App() {
-  // const [nextPage, setNextPage] = useState(false);
-  // const {userLog} = useContext(UserContext)
+
 
   const { userLog,setUserLog, USER_INITIAL } = useContext(UserContext);
 
+  console.log(userLog);
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
       setUserLog(user || USER_INITIAL);
@@ -24,12 +24,9 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        
+      <Routes>        
         <Route exact path="/" element={<LoggedOut />} />
-
         <Route path="/welcome" element={<Welcome />} />
-
         <Route path="/feed" element={<Feed />} />
       </Routes>
     </div>

@@ -5,6 +5,17 @@
     justify-content: center;
     height: 100vh;
 }
+.welcomeName p:first-child {
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 3.125rem;
+    line-height: 3.125rem;
+    color: #fff;
+}
+
+.welcomeName p span{
+    color: rgb(224, 38, 109);
+}
 
 .usernameColor {
     display: flex;
