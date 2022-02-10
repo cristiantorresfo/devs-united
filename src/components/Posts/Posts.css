@@ -20,7 +20,7 @@
   .post {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     border-radius: 5px;
     margin: 5px;
     height: 15.375rem;
@@ -29,6 +29,7 @@
     font-family: 'Fira Code', monospace;
     font-weight: 28.125rem;
     border-bottom:2px solid #60265B ;
+    margin-top:  30px;
 
   }
   
@@ -54,4 +55,34 @@
     font-weight: 700;
     font-size: 1.25rem;
     color:#2E132C;
+    margin-right: 0.75rem;
+    
   }
+  .message{
+    font-family: 'Fira Code', monospace;
+    font-weight: 450;
+    font-size: 1.125rem;
+    color: #ffffff;
+    width: 31.25rem;
+    height: 8.5rem;
+    text-align: left;
+    margin-bottom: 1.5625rem;
+  }
+
+  .containerUsername{
+    display: flex;
+  }
+  .container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.0625rem;
+  }
+
+  .likePost{
+    text-align: left;
+ }
+
+  .likePost img{
+    margin-right: 0.75rem;
+  }
+  

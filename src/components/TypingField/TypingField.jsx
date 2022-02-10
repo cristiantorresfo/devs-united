@@ -1,4 +1,4 @@
-import "./TypingField.css"
+import "./TypingField.css";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
@@ -10,9 +10,32 @@ const INITIAL_FORM_DATA = {
   uid: "",
   autor: "",
 };
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const getShortMonthName = function (date) {
+  return monthNames[date.getMonth()].substring(0, 3);
+};
+const fecha = new Date();
+
+const fechaPost = `- ${fecha.getDate()} ${getShortMonthName(fecha)}`;
+
 function TypingField() {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
   const { userLog } = useContext(UserContext);
+
+  console.log(fechaPost);
 
   const handleChange = (e) => {
     setNewPost(() => {
@@ -21,6 +44,7 @@ function TypingField() {
         email: userLog.email,
         uid: userLog.uid,
         autor: userLog.displayName,
+        fecha: fechaPost,
       };
     });
   };
@@ -34,13 +58,9 @@ function TypingField() {
   return (
     <div className="typingField">
       <img src={userLog.photoURL} alt="photoUser" />
-      <Link to="/">
-        <button onClick={logout}>Log out</button>
-      </Link>
-
       <form onSubmit={handleSubmit}>
         <textarea
-         maxLength="200"
+          maxLength="200"
           rows="4"
           cols="30"
           className="itemInput"
@@ -51,8 +71,8 @@ function TypingField() {
         />
         <br />
         <div className="containerSubmit">
-        <p>200 max.</p>
-        <button>POST</button>
+          <p>200 max.</p>
+          <button>POST</button>
         </div>
       </form>
     </div>
