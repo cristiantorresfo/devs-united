@@ -6,6 +6,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  getDocs,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -74,4 +75,34 @@ export async function updatePost(id, newData) {
   } catch (e) {
     console.log("Error al actualizar el post", e);
   }
+}
+
+export async function addUser(user) {
+  try {
+    await addDoc(collection(db, "users"), user);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+export async function updateUser(id, newData) {
+  const userRef = doc(db, "users", id);
+
+  try {
+    await updateDoc(userRef, newData);
+  } catch (e) {
+    console.log("Error al actualizar el user", e);
+  }
+}
+
+export async function getUsers() {
+  const usersCol = collection(db, "users");
+  const usersSnapshot = await getDocs(usersCol);
+  const usersList = usersSnapshot.docs.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id
+    };
+  });
+  return usersList;
 }

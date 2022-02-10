@@ -1,18 +1,28 @@
 import "./LogIn.css";
-import { logInWithGoogle } from "../../firebase";
+import { getUsers, logInWithGoogle } from "../../firebase";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 function LogIn() {
-  const { userLog } = useContext(UserContext);
+  const { userLog, users, setUsers} = useContext(UserContext);
+
+  
+useEffect(() => {
+  getUsers().then((data) => {
+    console.log(data);
+    setUsers(data);
+  })
+}, [setUsers]);
+
+  
   return (
     <div className="LogInGoogle">
       <p>Lorem, ipsum dolor.</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         
         {userLog.uid.length !== 0 ? (
-          <Link to="/welcome">
+          <Link to="/feed">
             <br />
             <button className="continueBtn">Continue</button>
           </Link>

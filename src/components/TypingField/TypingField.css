@@ -1,0 +1,55 @@
+.typingField {
+    
+    padding: 1.25rem 0 1rem 0;
+    background-color: #150714;
+    display: flex;
+    justify-content: center
+    ;
+}
+
+.typingField img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.itemInput {
+    width: 31.25rem;
+    height: 7.0625rem;
+    background-color: #2F112D;
+    font-family: 'Fira Code', monospace;
+    font-weight: 450;
+    font-size: 1.25rem;
+    color: #914D8B;
+    margin-bottom: 10px;
+}
+
+.containerSubmit{
+    display: flex;
+    flex-direction: column;
+align-items: flex-end;}
+
+.containerSubmit p{
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    color: #F50D5A;
+    margin-bottom: 0.4375rem;
+
+}
+
+.containerSubmit button{
+    width: 6.375rem;
+    height: 2.1875rem;
+    background-color: #2F112D;
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #150714;
+    line-height: 20px;
+    border: 0;
+}
+
+.containerSubmit button:hover{
+    cursor: pointer;
+}

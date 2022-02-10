@@ -1,3 +1,4 @@
+import "./TypingField.css"
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
@@ -31,7 +32,7 @@ function TypingField() {
     });
   };
   return (
-    <div className="user-profile">
+    <div className="typingField">
       <img src={userLog.photoURL} alt="photoUser" />
       <Link to="/">
         <button onClick={logout}>Log out</button>
@@ -39,16 +40,20 @@ function TypingField() {
 
       <form onSubmit={handleSubmit}>
         <textarea
+         maxLength="200"
           rows="4"
           cols="30"
           className="itemInput"
           onChange={handleChange}
           type="text"
-          placeholder="Message here..."
+          placeholder="What's happening?"
           value={newPost.message}
         />
         <br />
-        <button>Enviar</button>
+        <div className="containerSubmit">
+        <p>200 max.</p>
+        <button>POST</button>
+        </div>
       </form>
     </div>
   );

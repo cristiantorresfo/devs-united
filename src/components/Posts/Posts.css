@@ -8,9 +8,7 @@
     background-color: red;
   }
   
-  .itemInput {
-    margin-bottom: 10px;
-  }
+  
   .users {
     width: 50%;
     background-color: rgb(99, 214, 218);
@@ -24,13 +22,36 @@
     flex-direction: row;
     justify-content: space-around;
     border-radius: 5px;
-    border: 2px solid azure;
     margin: 5px;
-    background-color: powderblue;
+    height: 15.375rem;
+    font-size: 1.125rem;
+    color: #ffffff;
+    font-family: 'Fira Code', monospace;
+    font-weight: 28.125rem;
+    border-bottom:2px solid #60265B ;
+
   }
   
   .actionBtn {
     cursor: pointer;
     padding: 10px;
     margin-left: 10px;
+  }
+  .containerPosts{
+    display: flex; 
+    justify-content: center;
+    border: 2px solid #60265B;  
+  }
+
+  .photo_user{    
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+  .username{
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color:#2E132C;
   }

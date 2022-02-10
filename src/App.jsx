@@ -10,9 +10,10 @@ import Welcome from "./pages/Welcome/Welcome";
 function App() {
 
 
-  const { userLog,setUserLog, USER_INITIAL } = useContext(UserContext);
+  const { setUserLog, USER_INITIAL } = useContext(UserContext);
+  
 
-  console.log(userLog);
+  
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
       setUserLog(user || USER_INITIAL);
