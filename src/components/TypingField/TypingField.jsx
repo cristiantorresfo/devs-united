@@ -24,18 +24,21 @@ const monthNames = [
   "November",
   "December",
 ];
-const getShortMonthName = function (date) {
-  return monthNames[date.getMonth()].substring(0, 3);
-};
-const fecha = new Date();
-
-const fechaPost = `- ${fecha.getDate()} ${getShortMonthName(fecha)}`;
 
 function TypingField() {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
   const { userLog } = useContext(UserContext);
 
-  console.log(fechaPost);
+
+  const getShortMonthName = function (date) {
+    return monthNames[date.getMonth()].substring(0, 3);
+  };
+  
+  const fecha = new Date();
+
+  const fechaPost = `- ${fecha.getDate()} ${getShortMonthName(fecha)}`;
+  
+  const fechaUNIX = fecha.getTime()
 
   const handleChange = (e) => {
     setNewPost(() => {
@@ -44,7 +47,8 @@ function TypingField() {
         email: userLog.email,
         uid: userLog.uid,
         autor: userLog.displayName,
-        fecha: fechaPost,
+        date: fechaPost,
+        dateUNIX: fechaUNIX
       };
     });
   };

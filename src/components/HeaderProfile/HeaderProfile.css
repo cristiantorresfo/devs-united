@@ -1,0 +1,88 @@
+.headerProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 3.25rem;
+}
+.headerUsername {
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+    color: #fff;
+    margin-right: 18rem;
+    
+}
+
+.back {
+
+    margin-right: 1.375rem;
+}
+
+.logout{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 7.25rem;
+    height: 2.1875rem;
+    background-color:#F50D5A;
+    font-family: silkscreen;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #250C23   ;
+    cursor: pointer;
+}
+
+.logout p {
+    color: #250C23;
+}
+
+.logout img {
+    width: 1.375rem;
+    height: 1.125rem;
+}
+
+.photoUser{
+    width: 8.375rem;
+    height: 8.375rem;
+border-radius: 50%;
+margin-bottom: 1rem;
+}
+
+.profileUsername{
+    
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.875rem;
+    color:#150714;
+    margin-bottom: 1.25rem;
+}
+
+.dataProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #150714 ;
+}
+
+.activeBtn{
+    width: 18.9063rem;
+    height: 2.875rem;
+    background-color: #60265B;
+    color: #150714;
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.inactiveBtn {
+    width: 18.9063rem;
+    height: 2.875rem;
+    background-color: #150714;
+    color: #60265B;
+    font-family: silkscreen;
+    font-weight: 700;
+    font-size: 1.5rem;
+
+}

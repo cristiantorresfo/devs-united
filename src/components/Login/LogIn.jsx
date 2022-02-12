@@ -19,8 +19,8 @@ function LogIn() {
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
       {userLog.uid.length !== 0 ? (
-        <Link to="/feed">
-          <br />
+        <Link to="feed">
+        <br />
           <button className="continueBtn">Continue</button>
         </Link>
       ) : (
@@ -28,7 +28,7 @@ function LogIn() {
           <div className="googleLogo">
             <img src="./images/googleLogo.svg" alt="" />
           </div>
-          <button className="login-btn">Log in with Google</button>
+          <button className="login-btn">Sign in with Google</button>
         </div>
       )}
 

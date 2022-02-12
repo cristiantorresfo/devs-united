@@ -5,13 +5,13 @@
 }
 .App {
   display: flex;
-  justify-content: center;
   font-family: sans-serif;
   text-align: center;
   background-color: #2E132C;
   flex-direction: column;
-  align-items: center;
-  margin: auto
+  overflow-x: hidden;
+  height: 100vh; 
+  
 }
 
 h3 {

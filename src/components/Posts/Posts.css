@@ -2,12 +2,7 @@
 
 } */
 
-.delete {
-    border-radius: 10px;
-    color: #ffffff;
-    background-color: red;
-  }
-  
+
   
   .users {
     width: 50%;
@@ -41,7 +36,8 @@
   .containerPosts{
     display: flex; 
     justify-content: center;
-    border: 2px solid #60265B;  
+    border-top: 2px solid #60265B;
+  
   }
 
   .photo_user{    
@@ -79,10 +75,14 @@
   }
 
   .likePost{
+    display: flex;
     text-align: left;
+    font-size: 1rem;
  }
 
   .likePost img{
     margin-right: 0.75rem;
+    width: 1.5rem;
+    height: 1.25rem;
   }
   
