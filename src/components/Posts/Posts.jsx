@@ -1,5 +1,11 @@
 import "./Posts.css";
-import { db, deletePost, getUsers, updatePost } from "../../firebase";
+import {
+  db,
+  deletePost,
+  getUsers,
+  updatePost,
+  updateUser,
+} from "../../firebase";
 
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
@@ -16,6 +22,7 @@ function Posts() {
       setUsers(data);
     });
   }, [setUsers]);
+
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
       const postsData = snapshot.docs.map(
@@ -29,7 +36,7 @@ function Posts() {
             email: doc.data().email,
             uid: doc.data().uid,
             date: doc.data().date,
-            dateUNIX: doc.data().dateUNIX
+            dateUNIX: doc.data().dateUNIX,
           };
         },
         (error) => {
@@ -42,7 +49,7 @@ function Posts() {
     return () => {
       unsub();
     };
-  }, [setPosts]);
+  }, []);
 
   const handlerDelete = (e) => {
     deletePost(e.target.id).then((id) => {
@@ -53,11 +60,40 @@ function Posts() {
     });
   };
 
-  const likePost = (id, fav, likes = 0) => {
-    !fav
-      ? updatePost(id, { fav: true, likes: likes + 1 })
-      : updatePost(id, { fav: false, likes: likes - 1 });
+  const favoritesPosts = (postId, fav, likes) => (e) => {
+    users.map((user) => {
+      user.uid === userLog.uid &&
+        (!user.favorites.includes(postId) ? (
+          <>
+            {user.favorites.push(postId)}
+            {(e.target.src = "./images/corazonFav.svg")}
+          </>
+        ) : (
+          <>
+            {
+              (user.favorites = user.favorites.filter((fav) => {
+                return fav !== postId;
+              }))
+            }
+            {(e.target.src = "./images/corazonUnFav.svg")}
+          </>
+        ));
+
+      return updateUser(user.id, { favorites: user.favorites });
+    });
+
+    !fav.includes(userLog.uid)
+      ? fav.push(userLog.uid)
+      : (fav = fav.filter((fa) => {
+          return fa !== userLog.uid;
+        }));
+
+    return updatePost(postId, { fav: fav, likes: fav.length });
   };
+
+  const filterUsersByUid = users.filter((user) => {
+    return user.uid === userLog.uid;
+  });
 
   return (
     <div className="containerPosts">
@@ -112,13 +148,13 @@ function Posts() {
                 <div className="likePost">
                   <img
                     height="13px"
-                    src={
-                      post.fav
+                    src={filterUsersByUid.map((user) => {
+                      return user.favorites.includes(post.id)
                         ? "./images/corazonFav.svg"
-                        : "./images/corazonUnFav.svg"
-                    }
+                        : "./images/corazonUnFav.svg";
+                    })}
                     alt="logo_fav"
-                    onClick={() => likePost(post.id, post.fav, post.likes)}
+                    onClick={favoritesPosts(post.id, post.fav, post.likes)}
                   />
                   <span>{post.likes ? post.likes : 0}</span>
                 </div>

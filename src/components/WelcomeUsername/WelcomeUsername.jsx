@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ColorContext } from "../../contexts/ColorContext";
 import { UserContext } from "../../contexts/UserContext";
-import { addUser, getUsers } from "../../firebase";
+import { addUser } from "../../firebase";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import "./WelcomeUsername.css";
 
@@ -11,19 +11,15 @@ const INITIAL_DATA = {
   email: "",
   uid: "",
   autor: "",
-};
+  photo:""
+  };
 
 function WelcomeUsername() {
-  const { userLog, setUsers } = useContext(UserContext);
+  const { userLog } = useContext(UserContext);
   const { color } = useContext(ColorContext);
   const [newUsername, setNewUsername] = useState(INITIAL_DATA);
 
-  useEffect(() => {
-    getUsers().then((data) => {
-      console.log(data);
-      setUsers(data);
-    });
-  }, [setUsers]);
+ 
 
   const handleChangeUsername = (e) => {
     const newUser = {
@@ -33,6 +29,7 @@ function WelcomeUsername() {
       autor: userLog.displayName,
       photo: userLog.photoURL,
       color: color.hex,
+      favorites: []
     };
 
     setNewUsername(newUser);
