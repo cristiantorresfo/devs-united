@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getUsers } from "../firebase";
 
 
 const USER_INITIAL = {
@@ -12,6 +13,13 @@ export const UserProvider = ({ children }) => {
 
     const [userLog, setUserLog] = useState(USER_INITIAL);
     const [users, setUsers] = useState([])
+    
+    useEffect(() => {
+      getUsers().then((data) => {
+        setUsers(data);
+      });
+    }, [setUsers]);
+    
 
   return (
     <UserContext.Provider value={{ userLog, setUserLog, USER_INITIAL, users, setUsers }}>

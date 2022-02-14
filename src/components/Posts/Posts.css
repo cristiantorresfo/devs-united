@@ -55,12 +55,13 @@
     
   }
   .message{
+    word-wrap: break-word;
     font-family: 'Fira Code', monospace;
     font-weight: 450;
     font-size: 1.125rem;
     color: #ffffff;
     width: 31.25rem;
-    height: 8.5rem;
+    height: 7rem;
     text-align: left;
     margin-bottom: 1.5625rem;
   }

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import FavoritesPosts from "../../components/FavoritesPosts/FavoritesPosts";
 import HeaderProfile from "../../components/HeaderProfile/HeaderProfile";
-import Posts from "../../components/Posts/Posts";
 import PostsUsers from "../../components/PostsUser/PostsUser";
 import "./UserProfile.css";
 
@@ -10,7 +10,7 @@ function UserProfile() {
       <HeaderProfile />
       <Routes>
         <Route path="/posts" element={<PostsUsers />} />
-        <Route path="/favorites" element={<Posts />} />
+        <Route path="/favorites" element={<FavoritesPosts />} />
       </Routes>
     </div>
   );

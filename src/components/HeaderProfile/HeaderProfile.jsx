@@ -1,11 +1,12 @@
 import "./HeaderProfile.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { logout } from "../../firebase";
 import { Link } from "react-router-dom";
 
 function HeaderProfile() {
   const { userLog, users } = useContext(UserContext);
+  const [isActive ,setIsActive] = useState(true)
 
   const headerUsername = users.map((user) => {
     return (
@@ -67,10 +68,10 @@ function HeaderProfile() {
         {profileUsername}
         <div>
           <Link to= "posts">
-            <button className="activeBtn">POSTS</button>
+            <button className={isActive ? "activeBtn" : "inactiveBtn"} onClick={() => setIsActive(!isActive)}  >POSTS</button>
           </Link>
           <Link to ="favorites">
-          <button className="inactiveBtn">FAVORITES</button>
+          <button className={!isActive ? "activeBtn" : "inactiveBtn"} onClick={() => setIsActive(!isActive)}>FAVORITES</button>
           </Link>
         </div>
       </div>

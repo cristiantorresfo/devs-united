@@ -48,7 +48,8 @@ function TypingField() {
         uid: userLog.uid,
         autor: userLog.displayName,
         date: fechaPost,
-        dateUNIX: fechaUNIX
+        dateUNIX: fechaUNIX,
+        fav:[]
       };
     });
   };

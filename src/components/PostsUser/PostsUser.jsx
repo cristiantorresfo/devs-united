@@ -2,7 +2,7 @@ import "./PostsUser.css"
 import { useContext } from "react";
 import { PostsContext } from "../../contexts/PostsContext";
 import { UserContext } from "../../contexts/UserContext";
-import { deletePost } from "../../firebase";
+import { deletePost, updatePost, updateUser } from "../../firebase";
 
 function PostsUsers() {
   const { posts, setPosts } = useContext(PostsContext);
@@ -17,19 +17,48 @@ function PostsUsers() {
       });
     };
 
-    // const likePost = (id, fav, likes = 0) => {
-    //   !fav
-    //     ? updatePost(id, { fav: true, likes: likes + 1 })
-    //     : updatePost(id, { fav: false, likes: likes - 1 });
-    // };
-
   const postsFiltered = posts.filter(
-    (post) => post.uid === userLog.uid && !post.fav
+    (post) => post.uid === userLog.uid
   );
-  console.log(postsFiltered);
+
+  const filterUsersByUid = users.filter((user) => {
+    return user.uid === userLog.uid;
+  });
+
+  const favoritesPosts = (postId, fav) => (e) => {
+    users.map((user) => {
+      user.uid === userLog.uid &&
+        (!user.favorites.includes(postId) ? (
+          <>
+            {user.favorites.push(postId)}
+            {(e.target.src = "../images/corazonFav.svg")}
+          </>
+        ) : (
+          <>
+            {
+              (user.favorites = user.favorites.filter((fav) => {
+                return fav !== postId;
+              }))
+            }
+            {(e.target.src = "../images/corazonUnFav.svg")}
+          </>
+        ));
+
+      return updateUser(user.id, { favorites: user.favorites });
+    });
+    !fav.includes(userLog.uid)
+      ? fav.push(userLog.uid)
+      : (fav = fav.filter((fa) => {
+          return fa !== userLog.uid;
+        }));
+
+    return updatePost(postId, { fav: fav, likes: fav.length });
+  };
+
+  
 
   return (
-    <div className="containerPostsUser">
+    <div className="containerPosts">
       <div className="posts">
         {postsFiltered.map((post) => {
           return (
@@ -70,23 +99,24 @@ function PostsUsers() {
                     <img
                       src="../images/delete.svg"
                       id={post.id}
-                    onClick = {handlerDelete}
+                      onClick={handlerDelete}
                       alt="delete_img"
                     />
                   ) : null}
                 </div>
 
-                <p className="message">{post.message}</p>
+                <div className="message">{post.message}</div>
 
                 <div className="likePost">
                   <img
                     height="13px"
-                    src={
-                      post.fav
+                    src={filterUsersByUid.map((user) => {
+                      return user.favorites.includes(post.id)
                         ? "../images/corazonFav.svg"
-                        : "../images/corazonUnFav.svg"
-                    }
+                        : "../images/corazonUnFav.svg";
+                    })}
                     alt="logo_fav"
+                    onClick={favoritesPosts(post.id, post.fav, post.likes)}
                   />
                   <span>{post.likes ? post.likes : 0}</span>
                 </div>

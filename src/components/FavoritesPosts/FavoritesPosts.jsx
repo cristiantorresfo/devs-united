@@ -1,11 +1,10 @@
-import "./Posts.css";
 import { deletePost, updatePost, updateUser } from "../../firebase";
 
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
 
-function Posts() {
+function FavoritesPosts() {
   const { users, userLog } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostsContext);
 
@@ -18,9 +17,15 @@ function Posts() {
     });
   };
 
- 
+  const postsFilterByFavorite = []
 
- const postsSortByDate = posts.sort((a, b) => b.dateUNIX - a.dateUNIX);
+  users.map(user =>{
+      return user.uid === userLog.uid &&
+       posts.map(post => {
+         return user.favorites.includes(post.id) && (postsFilterByFavorite.push(post))
+      })
+  })
+
 
   const favoritesPosts = (postId, fav) => (e) => {
     users.map((user) => {
@@ -28,7 +33,7 @@ function Posts() {
         (!user.favorites.includes(postId) ? (
           <>
             {user.favorites.push(postId)}
-            {(e.target.src = "./images/corazonFav.svg")}
+            {(e.target.src = "../images/corazonFav.svg")}
           </>
         ) : (
           <>
@@ -37,7 +42,7 @@ function Posts() {
                 return fav !== postId;
               }))
             }
-            {(e.target.src = "./images/corazonUnFav.svg")}
+            {(e.target.src = "../images/corazonUnFav.svg")}
           </>
         ));
 
@@ -60,7 +65,7 @@ function Posts() {
   return (
     <div className="containerPosts">
       <div className="posts">
-        {postsSortByDate.map((post) => {
+        {postsFilterByFavorite.map((post) => {
           return (
             <div className="post" key={post.id}>
               {users.map((user) => {
@@ -97,7 +102,7 @@ function Posts() {
 
                   {userLog?.uid === post.uid ? (
                     <img
-                      src="./images/delete.svg"
+                      src="../images/delete.svg"
                       id={post.id}
                       onClick={handlerDelete}
                       alt="delete_img"
@@ -112,8 +117,8 @@ function Posts() {
                     height="13px"
                     src={filterUsersByUid.map((user) => {
                       return user.favorites.includes(post.id)
-                        ? "./images/corazonFav.svg"
-                        : "./images/corazonUnFav.svg";
+                        ? "../images/corazonFav.svg"
+                        : "../images/corazonUnFav.svg";
                     })}
                     alt="logo_fav"
                     onClick={favoritesPosts(post.id, post.fav, post.likes)}
@@ -128,4 +133,4 @@ function Posts() {
     </div>
   );
 }
-export default Posts;
+export default FavoritesPosts;
