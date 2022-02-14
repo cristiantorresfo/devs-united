@@ -35,7 +35,7 @@ function WelcomeUsername() {
     setNewUsername(newUser);
   };
 
-  const handleSubmitUsername = (e) => {
+  const handleSubmitUsername = () => {
     addUser(newUsername);
   };
 
@@ -53,7 +53,7 @@ function WelcomeUsername() {
       />
       <p>Select your favorite color</p>
       <ColorPicker />
-      <Link to="/feed">
+      <Link to = "/feed">
         <br />
         <button className="continueBtn" onClick={handleSubmitUsername}>
           Continue

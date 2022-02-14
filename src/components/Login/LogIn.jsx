@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 function LogIn() {
-  const { userLog, setUsers } = useContext(UserContext);
+  const { users, userLog, setUsers } = useContext(UserContext);
 
   useEffect(() => {
     getUsers().then((data) => {
@@ -13,13 +13,19 @@ function LogIn() {
     });
   }, [setUsers]);
 
+  const usersfilter = users.some((user) => {
+    return user.uid === userLog.uid 
+ })
+
+console.log(usersfilter);
+
   return (
     <div className="LogInGoogle">
       <p>Lorem, ipsum dolor.</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
       {userLog.uid.length !== 0 ? (
-        <Link to="feed">
+        <Link to={usersfilter === true ? ("/feed") : ("/welcome") } >
         <br />
           <button className="continueBtn">Continue</button>
         </Link>
