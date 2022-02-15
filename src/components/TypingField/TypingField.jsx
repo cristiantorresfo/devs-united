@@ -1,8 +1,7 @@
 import "./TypingField.css";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { addPost, logout } from "../../firebase";
+import { addPost } from "../../firebase";
 
 const INITIAL_FORM_DATA = {
   message: "",
@@ -29,16 +28,15 @@ function TypingField() {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
   const { userLog } = useContext(UserContext);
 
-
   const getShortMonthName = function (date) {
     return monthNames[date.getMonth()].substring(0, 3);
   };
-  
+
   const fecha = new Date();
 
   const fechaPost = `- ${fecha.getDate()} ${getShortMonthName(fecha)}`;
-  
-  const fechaUNIX = fecha.getTime()
+
+  const fechaUNIX = fecha.getTime();
 
   const handleChange = (e) => {
     setNewPost(() => {
@@ -49,7 +47,7 @@ function TypingField() {
         autor: userLog.displayName,
         date: fechaPost,
         dateUNIX: fechaUNIX,
-        fav:[]
+        fav: [],
       };
     });
   };

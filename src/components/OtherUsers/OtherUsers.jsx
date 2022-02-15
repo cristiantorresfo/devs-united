@@ -1,32 +1,18 @@
-import { deletePost, updatePost, updateUser } from "../../firebase";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
+import { UserContext } from "../../contexts/UserContext";
+import { updatePost, updateUser } from "../../firebase";
 
-function FavoritesPosts() {
-  const { users, userLog } = useContext(UserContext);
-  const { posts, setPosts } = useContext(PostsContext);
+function OtherUsers() {
+  const { posts } = useContext(PostsContext);
+  const { users, userLog, uidSelected } = useContext(UserContext);
 
-  const handlerDelete = (e) => {
-    deletePost(e.target.id).then((id) => {
-      const newPosts = posts.filter((post) => {
-        return post.id !== id;
-      });
-      setPosts(newPosts);
-    });
-  };
+  const postsFiltered = posts.filter(
+    (post) => post.uid === uidSelected && post.uid !== userLog.uid
+  );
 
-  const postsFilterByFavorite = [];
-
-  users.map((user) => {
-    return (
-      user.uid === userLog.uid &&
-      posts.map((post) => {
-        return (
-          user.favorites.includes(post.id) && postsFilterByFavorite.push(post)
-        );
-      })
-    );
+  const filterUsersByUid = users.filter((user) => {
+    return user.uid === userLog.uid;
   });
 
   const favoritesPosts = (postId, fav) => (e) => {
@@ -50,7 +36,6 @@ function FavoritesPosts() {
 
       return updateUser(user.id, { favorites: user.favorites });
     });
-
     !fav.includes(userLog.uid)
       ? fav.push(userLog.uid)
       : (fav = fav.filter((fa) => {
@@ -60,14 +45,10 @@ function FavoritesPosts() {
     return updatePost(postId, { fav: fav, likes: fav.length });
   };
 
-  const filterUsersByUid = users.filter((user) => {
-    return user.uid === userLog.uid;
-  });
-
   return (
-    <div className="containerPosts">
+    <main className="containerPosts">
       <div className="posts">
-        {postsFilterByFavorite.map((post) => {
+        {postsFiltered.map((post) => {
           return (
             <div className="post" key={post.id}>
               {users.map((user) => {
@@ -102,14 +83,14 @@ function FavoritesPosts() {
                     <p>{post.date}</p>
                   </div>
 
-                  {userLog?.uid === post.uid ? (
+                  {/* {userLog?.uid === post.uid ? (
                     <img
                       src="../images/delete.svg"
                       id={post.id}
-                      onClick={handlerDelete}
+                      onClick={}
                       alt="delete_img"
                     />
-                  ) : null}
+                  ) : null} */}
                 </div>
 
                 <div className="message">{post.message}</div>
@@ -132,7 +113,8 @@ function FavoritesPosts() {
           );
         })}
       </div>
-    </div>
+    </main>
   );
 }
-export default FavoritesPosts;
+
+export default OtherUsers;

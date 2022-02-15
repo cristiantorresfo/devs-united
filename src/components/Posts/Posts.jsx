@@ -1,12 +1,12 @@
 import "./Posts.css";
 import { deletePost, updatePost, updateUser } from "../../firebase";
-
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
+import { Link } from "react-router-dom";
 
 function Posts() {
-  const { users, userLog } = useContext(UserContext);
+  const { users, userLog, setUidSelected } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostsContext);
 
   const handlerDelete = (e) => {
@@ -18,9 +18,11 @@ function Posts() {
     });
   };
 
- 
+  const handleSendUid = (uid) => {
+    setUidSelected(uid);
+  };
 
- const postsSortByDate = posts.sort((a, b) => b.dateUNIX - a.dateUNIX);
+  const postsSortByDate = posts.sort((a, b) => b.dateUNIX - a.dateUNIX);
 
   const favoritesPosts = (postId, fav) => (e) => {
     users.map((user) => {
@@ -58,7 +60,7 @@ function Posts() {
   });
 
   return (
-    <div className="containerPosts">
+    <main className="containerPosts">
       <div className="posts">
         {postsSortByDate.map((post) => {
           return (
@@ -67,11 +69,20 @@ function Posts() {
                 return (
                   user.email === post.email && (
                     <div key={user.uid}>
-                      <img
-                        className="photo_user"
-                        src={user.photo}
-                        alt="photo_user"
-                      />
+                      <Link
+                        to={
+                          post.uid === userLog.uid
+                            ? "/profile/posts"
+                            : `/user/${user.username}`
+                        }
+                      >
+                        <img
+                          className="photo_user"
+                          src={user.photo}
+                          onClick={() => handleSendUid(post.uid)}
+                          alt="photo_user"
+                        />
+                      </Link>
                     </div>
                   )
                 );
@@ -125,7 +136,7 @@ function Posts() {
           );
         })}
       </div>
-    </div>
+    </main>
   );
 }
 export default Posts;

@@ -2,15 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 
-
-
-.LogInGoogle{
+.LogInGoogle {
     display: flex;
+    text-align: left;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: center;
     height: 100vh;
-    max-width: 500px;
+    max-width: 28.125rem;
 }
 
 
@@ -19,22 +18,25 @@
     cursor: pointer;
 }
 
-.LogInGoogle p:first-child{
+.LogInGoogle p:first-child {
     font-family: silkscreen;
     font-weight: 700;
     font-size: 3.125rem;
     color: #fff;
+    margin-bottom: 2.3125rem;
 }
 
-.LogInGoogle p:nth-child(2){
+.LogInGoogle p:nth-child(2) {
     font-family: 'Fira Code', monospace;
     font-weight: 450;
     font-size: 1.5rem;
     line-height: 1.5rem;
     color: #fff;
+    margin-bottom: 2.3125rem;
+
 }
 
-.LogInGoogle p:last-child{
+.LogInGoogle p:last-child {
     font-family: 'Fira Code', monospace;
     font-weight: 450;
     font-size: 1.125rem;
@@ -54,12 +56,14 @@
     line-height: 1.75rem;
     border: #4285F4;
     cursor: pointer;
+    margin-bottom: 10.3125rem;
 }
 
-.login-btn:hover{
+.login-btn:hover {
     background-color: #5793f3;
 }
-.googleLogo{
+
+.googleLogo {
     background-color: #fff;
     width: 3.6513rem;
     height: 3.625rem;
@@ -70,11 +74,28 @@
     border: solid 3px #4285F4;
 }
 
-.continueBtn{
+.continueBtn {
     width: 26.5625rem;
     height: 4.1875rem;
     background-color: #00DA76;
     font-family: silkscreen;
     font-weight: 700;
     font-size: 1.5rem;
+    cursor: pointer;
 }
+
+.red {
+    color: rgba(255, 0, 0, 0.781);
+}
+
+@media screen and (max-width: 950px) {
+    
+    .initialContainer{
+      flex-direction: column;
+    }
+    .LogInGoogle{
+        height: max-content;
+        margin-top: 12.1875rem;
+        text-align: center;
+    }
+  }

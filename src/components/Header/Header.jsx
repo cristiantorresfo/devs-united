@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 function Header() {
   const { userLog } = useContext(UserContext);
   return (
-    <div className="header">
+    <header className="header">
       <Link to = "/profile/posts" >
       <img src={userLog.photoURL} alt="photo_user" />
       </Link>
       <img src="./images/logo.png" alt="logo" />
       <img src="./images/logo_name.png" alt="logo_name" />
-    </div>
+    </header>
   );
 }
 

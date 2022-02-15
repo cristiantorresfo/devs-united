@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import FavoritesPosts from "../../components/FavoritesPosts/FavoritesPosts";
 import HeaderProfile from "../../components/HeaderProfile/HeaderProfile";
 import PostsUsers from "../../components/PostsUser/PostsUser";
-import "./UserProfile.css";
 
 function UserProfile() {
   return (

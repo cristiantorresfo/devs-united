@@ -53,3 +53,9 @@ align-items: flex-end;}
 .containerSubmit button:hover{
     cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+    .itemInput{
+        width: 20rem;        
+    }
+}

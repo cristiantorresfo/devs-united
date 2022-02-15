@@ -1,16 +1,13 @@
-import "./HeaderProfile.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { logout } from "../../firebase";
 import { Link } from "react-router-dom";
 
-function HeaderProfile() {
-  const { userLog, users } = useContext(UserContext);
-  const [isActive, setIsActive] = useState(true);
+function HeaderUser() {
+  const { users, uidSelected } = useContext(UserContext);
 
   const headerUsername = users.map((user) => {
     return (
-      user.uid === userLog.uid && (
+      user.uid === uidSelected && (
         <p key={user.uid} className="headerUsername">
           {user.username}
         </p>
@@ -19,7 +16,7 @@ function HeaderProfile() {
   });
   const profileUsername = users.map((user) => {
     return (
-      user.uid === userLog.uid && (
+      user.uid === uidSelected && (
         <span
           key={user.uid}
           className="profileUsername"
@@ -33,7 +30,7 @@ function HeaderProfile() {
 
   const photoProfile = users.map((user) => {
     return (
-      user.uid === userLog.uid && (
+      user.uid === uidSelected && (
         <img
           key={user.uid}
           className="photoUser"
@@ -42,7 +39,7 @@ function HeaderProfile() {
             borderStyle: "solid",
             borderColor: user.color,
           }}
-          src={userLog.photoURL}
+          src={user.photo}
           alt="photo_user"
         />
       )
@@ -50,43 +47,19 @@ function HeaderProfile() {
   });
 
   return (
-    <header>
+    <div>
       <div className="headerProfile">
         <Link to="/feed">
           <img className="back" src="../images/back.svg" alt="back" />
         </Link>
         {headerUsername}
-        <Link to="/">
-          <button className="logout" onClick={logout}>
-            <p>LOGOUT</p>
-            <img src="../images/logout.svg" alt="logo" />
-          </button>
-        </Link>
       </div>
       <div className="dataProfile">
         {photoProfile}
         {profileUsername}
-        <div>
-          <Link to="posts">
-            <button
-              className={isActive ? "activeBtn" : "inactiveBtn"}
-              onClick={() => setIsActive(!isActive)}
-            >
-              POSTS
-            </button>
-          </Link>
-          <Link to="favorites">
-            <button
-              className={!isActive ? "activeBtn" : "inactiveBtn"}
-              onClick={() => setIsActive(!isActive)}
-            >
-              FAVORITES
-            </button>
-          </Link>
-        </div>
       </div>
-    </header>
+    </div>
   );
 }
 
-export default HeaderProfile;
+export default HeaderUser;

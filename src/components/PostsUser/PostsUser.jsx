@@ -1,4 +1,4 @@
-import "./PostsUser.css"
+import "./PostsUser.css";
 import { useContext } from "react";
 import { PostsContext } from "../../contexts/PostsContext";
 import { UserContext } from "../../contexts/UserContext";
@@ -8,18 +8,16 @@ function PostsUsers() {
   const { posts, setPosts } = useContext(PostsContext);
   const { users, userLog } = useContext(UserContext);
 
-    const handlerDelete = (e) => {
-      deletePost(e.target.id).then((id) => {
-        const newPosts = posts.filter((post) => {
-          return post.id !== id;
-        });
-        setPosts(newPosts);
+  const handlerDelete = (e) => {
+    deletePost(e.target.id).then((id) => {
+      const newPosts = posts.filter((post) => {
+        return post.id !== id;
       });
-    };
+      setPosts(newPosts);
+    });
+  };
 
-  const postsFiltered = posts.filter(
-    (post) => post.uid === userLog.uid
-  );
+  const postsFiltered = posts.filter((post) => post.uid === userLog.uid);
 
   const filterUsersByUid = users.filter((user) => {
     return user.uid === userLog.uid;
@@ -55,77 +53,79 @@ function PostsUsers() {
     return updatePost(postId, { fav: fav, likes: fav.length });
   };
 
-  
-
   return (
-    <div className="containerPosts">
+    <main className="containerPosts">
       <div className="posts">
-        {postsFiltered.map((post) => {
-          return (
-            <div className="post" key={post.id}>
-              {users.map((user) => {
-                return (
-                  user.email === post.email && (
-                    <div key={user.uid}>
-                      <img
-                        className="photo_user"
-                        src={user.photo}
-                        alt="photo_user"
-                      />
+        {postsFiltered.length === 0 ? (
+          <h4 className="noPosts">No posts yet</h4>
+        ) : (
+          postsFiltered.map((post) => {
+            return (
+              <div className="post" key={post.id}>
+                {users.map((user) => {
+                  return (
+                    user.email === post.email && (
+                      <div key={user.uid}>
+                        <img
+                          className="photo_user"
+                          src={user.photo}
+                          alt="photo_user"
+                        />
+                      </div>
+                    )
+                  );
+                })}
+                <div>
+                  <div className="container">
+                    <div className="containerUsername">
+                      {users.map((user) => {
+                        return (
+                          user.email === post.email && (
+                            <p
+                              key={user.uid}
+                              className="username"
+                              style={{ backgroundColor: user.color }}
+                            >
+                              {user.username}
+                            </p>
+                          )
+                        );
+                      })}
+                      <p>{post.date}</p>
                     </div>
-                  )
-                );
-              })}
-              <div>
-                <div className="container">
-                  <div className="containerUsername">
-                    {users.map((user) => {
-                      return (
-                        user.email === post.email && (
-                          <p
-                            key={user.uid}
-                            className="username"
-                            style={{ backgroundColor: user.color }}
-                          >
-                            {user.username}
-                          </p>
-                        )
-                      );
-                    })}
-                    <p>{post.date}</p>
+
+                    {userLog?.uid === post.uid ? (
+                      <img
+                        src="../images/delete.svg"
+                        id={post.id}
+                        onClick={handlerDelete}
+                        alt="delete_img"
+                      />
+                    ) : null}
                   </div>
 
-                  {userLog?.uid === post.uid ? (
+                  <div className="message">{post.message}</div>
+
+                  <div className="likePost">
                     <img
-                      src="../images/delete.svg"
-                      id={post.id}
-                      onClick={handlerDelete}
-                      alt="delete_img"
+                      height="13px"
+                      src={filterUsersByUid.map((user) => {
+                        return user.favorites.includes(post.id)
+                          ? "../images/corazonFav.svg"
+                          : "../images/corazonUnFav.svg";
+                      })}
+                      alt="logo_fav"
+                      onClick={favoritesPosts(post.id, post.fav, post.likes)}
                     />
-                  ) : null}
-                </div>
-
-                <div className="message">{post.message}</div>
-
-                <div className="likePost">
-                  <img
-                    height="13px"
-                    src={filterUsersByUid.map((user) => {
-                      return user.favorites.includes(post.id)
-                        ? "../images/corazonFav.svg"
-                        : "../images/corazonUnFav.svg";
-                    })}
-                    alt="logo_fav"
-                    onClick={favoritesPosts(post.id, post.fav, post.likes)}
-                  />
-                  <span>{post.likes ? post.likes : 0}</span>
+                    <span>{post.likes ? post.likes : 0}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
-    </div>
+    </main>
   );
 }
 

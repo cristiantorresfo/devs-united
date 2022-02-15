@@ -4,3 +4,10 @@
     border-top: 2px solid #60265B;
     
 }
+
+.noPosts{
+    color: antiquewhite;
+    font-family: silkscreen;
+    font-size: 2rem;
+    margin-top: 12.5rem;
+}

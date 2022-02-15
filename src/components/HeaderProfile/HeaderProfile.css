@@ -64,6 +64,7 @@ margin-bottom: 1rem;
     flex-direction: column;
     align-items: center;
     background-color: #150714 ;
+    padding-top: 1.25rem;
 }
 
 .activeBtn{
@@ -86,3 +87,21 @@ margin-bottom: 1rem;
     font-size: 1.5rem;
 
 }
+
+
+@media screen and (max-width: 605px) {
+    .activeBtn, .inactiveBtn{
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .headerUsername{
+        margin-right: 90px;
+    }
+
+    .activeBtn, .inactiveBtn{
+        width: 150px;
+    }
+}
+

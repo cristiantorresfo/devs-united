@@ -4,3 +4,14 @@
     justify-content: center;
     height: 100vh;
 }
+
+@media screen and (max-width: 950px) {
+    .imageContainer img {
+        width: 18.75rem;
+        height: 12.9375rem;
+    }
+    .imageContainer {
+        margin-top: 5rem;
+        height:max-content;
+    }
+  }

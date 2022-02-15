@@ -11,25 +11,23 @@ const INITIAL_DATA = {
   email: "",
   uid: "",
   autor: "",
-  photo:""
-  };
+  photo: "",
+};
 
 function WelcomeUsername() {
   const { userLog } = useContext(UserContext);
   const { color } = useContext(ColorContext);
   const [newUsername, setNewUsername] = useState(INITIAL_DATA);
 
- 
-
   const handleChangeUsername = (e) => {
     const newUser = {
-      username: e.target.value,
+      username: e.target.value.toUpperCase(),
       email: userLog.email,
       uid: userLog.uid,
       autor: userLog.displayName,
       photo: userLog.photoURL,
       color: color.hex,
-      favorites: []
+      favorites: [],
     };
 
     setNewUsername(newUser);
@@ -42,7 +40,7 @@ function WelcomeUsername() {
   return (
     <div className="welcomeName">
       <p>
-        Welcome <span>{userLog.displayName}</span>
+        Welcome <span style={{ color: color.hex }}>{newUsername.username}</span>
       </p>
       <input
         type="text"
@@ -51,9 +49,9 @@ function WelcomeUsername() {
         onChange={handleChangeUsername}
         value={newUsername.username}
       />
-      <p>Select your favorite color</p>
+      <p className="selectColor">Select your favorite color: {color.name}</p>
       <ColorPicker />
-      <Link to = "/feed">
+      <Link to="/feed">
         <br />
         <button className="continueBtn" onClick={handleSubmitUsername}>
           Continue

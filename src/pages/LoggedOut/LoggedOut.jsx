@@ -9,7 +9,6 @@ function LoggedOut() {
     <div className="initialContainer">
       <DevsLogo/>
       <LogIn />
-      {/* {setNextPage(false)} */}
     </div>
   );
 }

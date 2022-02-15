@@ -14,10 +14,10 @@ function LogIn() {
   }, [setUsers]);
 
   const usersfilter = users.some((user) => {
-    return user.uid === userLog.uid 
- })
+    return user.uid === userLog.uid;
+  });
 
-console.log(usersfilter);
+  console.log(usersfilter);
 
   return (
     <div className="LogInGoogle">
@@ -25,8 +25,8 @@ console.log(usersfilter);
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
       {userLog.uid.length !== 0 ? (
-        <Link to={usersfilter === true ? ("/feed") : ("/welcome") } >
-        <br />
+        <Link to={usersfilter === true ? "/feed" : "/welcome"}>
+          <br />
           <button className="continueBtn">Continue</button>
         </Link>
       ) : (
@@ -38,7 +38,7 @@ console.log(usersfilter);
         </div>
       )}
 
-      <p>© 2022 Devs_United - BETA</p>
+      <p>© 2022 Devs_United - <span className="red">BETA</span></p>
     </div>
   );
 }
