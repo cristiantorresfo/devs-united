@@ -1,19 +1,13 @@
 import "./LogIn.css";
-import { getUsers, logInWithGoogle } from "../../firebase";
+import {  logInWithGoogle } from "../../firebase";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 function LogIn() {
-  const { users, userLog, setUsers } = useContext(UserContext);
+  const { users, userLog } = useContext(UserContext);
 
-  useEffect(() => {
-    getUsers().then((data) => {
-      setUsers(data);
-    });
-  }, [setUsers]);
-
-  const usersfilter = users.some((user) => {
+ const usersfilter = users.some((user) => {
     return user.uid === userLog.uid;
   });
 

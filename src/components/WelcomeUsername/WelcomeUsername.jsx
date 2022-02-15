@@ -15,7 +15,7 @@ const INITIAL_DATA = {
 };
 
 function WelcomeUsername() {
-  const { userLog } = useContext(UserContext);
+  const { userLog, users } = useContext(UserContext);
   const { color } = useContext(ColorContext);
   const [newUsername, setNewUsername] = useState(INITIAL_DATA);
 
@@ -32,11 +32,19 @@ function WelcomeUsername() {
       };
     });
   };
-
+  const validationUsername = users.some((user) => {
+    return user.username === newUsername.username;
+  });
+  const validationUser = users.some((user) => {
+    return user.uid === userLog.uid;
+  });
   const handleSubmitUsername = () => {
+    validationUser &&
+      window.alert("This user already have a username registered");
+
     newUsername.username.length === 0
       ? window.alert("Please type a username before continue")
-      : addUser(newUsername);
+      : !validationUsername && addUser(newUsername);
   };
 
   return (
@@ -54,7 +62,9 @@ function WelcomeUsername() {
       <p className="selectColor">Select your favorite color: {color.name}</p>
       <ColorPicker />
       <br />
-      <Link to= {newUsername.username.length !== 0 && "/feed"}>
+      <Link
+        to={newUsername.username.length !== 0 && !validationUsername && "/feed"}
+      >
         <button className="continueBtn" onClick={handleSubmitUsername}>
           Continue
         </button>
