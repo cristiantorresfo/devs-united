@@ -1,5 +1,6 @@
+import { collection, onSnapshot } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
-import { getUsers } from "../firebase";
+import { db } from "../firebase";
 
 const USER_INITIAL = {
   uid: "",
@@ -12,11 +13,36 @@ export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [uidSelected, setUidSelected] = useState("");
 
+
   useEffect(() => {
-    getUsers().then((data) => {
-      setUsers(data);
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      const usersData = snapshot.docs.map(
+        (doc) => {
+          return {
+            username: doc.data().username,
+            id: doc.id,
+            photo: doc.data().photo,
+            autor: doc.data().autor,
+            email: doc.data().email,
+            uid: doc.data().uid,
+            color: doc.data().color,
+            favorites: doc.data().favorites,
+          };
+        },
+        (error) => {
+          console.log(error, "error de escucha");
+        }
+      );
+      setUsers(usersData);
     });
+
+    return () => {
+      unsub();
+    };
   }, [setUsers]);
+
+
+
 
   return (
     <UserContext.Provider

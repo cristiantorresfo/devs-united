@@ -20,21 +20,23 @@ function WelcomeUsername() {
   const [newUsername, setNewUsername] = useState(INITIAL_DATA);
 
   const handleChangeUsername = (e) => {
-    const newUser = {
-      username: e.target.value.toUpperCase(),
-      email: userLog.email,
-      uid: userLog.uid,
-      autor: userLog.displayName,
-      photo: userLog.photoURL,
-      color: color.hex,
-      favorites: [],
-    };
-
-    setNewUsername(newUser);
+    setNewUsername(() => {
+      return {
+        username: e.target.value.toUpperCase(),
+        email: userLog.email,
+        uid: userLog.uid,
+        autor: userLog.displayName,
+        photo: userLog.photoURL,
+        color: color.hex,
+        favorites: [],
+      };
+    });
   };
 
   const handleSubmitUsername = () => {
-    addUser(newUsername);
+    newUsername.username.length === 0
+      ? window.alert("Please type a username before continue")
+      : addUser(newUsername);
   };
 
   return (
@@ -51,8 +53,8 @@ function WelcomeUsername() {
       />
       <p className="selectColor">Select your favorite color: {color.name}</p>
       <ColorPicker />
-      <Link to="/feed">
-        <br />
+      <br />
+      <Link to= {newUsername.username.length !== 0 && "/feed"}>
         <button className="continueBtn" onClick={handleSubmitUsername}>
           Continue
         </button>

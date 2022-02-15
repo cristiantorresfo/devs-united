@@ -94,15 +94,3 @@ export async function updateUser(id, newData) {
     console.log("Error al actualizar el user", e);
   }
 }
-
-export async function getUsers() {
-  const usersCol = collection(db, "users");
-  const usersSnapshot = await getDocs(usersCol);
-  const usersList = usersSnapshot.docs.map((doc) => {
-    return {
-      ...doc.data(),
-      id: doc.id
-    };
-  });
-  return usersList;
-}

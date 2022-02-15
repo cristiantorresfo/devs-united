@@ -21,10 +21,9 @@ function LogIn() {
     <div className="LogInGoogle">
       <p>Lorem, ipsum dolor.</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-
+      <br />
       {userLog.uid.length !== 0 ? (
-        <Link to={usersfilter === true ? "/feed" : "/welcome"}>
-          <br />
+        <Link to={usersfilter === true ? "/feed" : "/welcome"}>          
           <button className="continueBtn">Continue</button>
         </Link>
       ) : (
