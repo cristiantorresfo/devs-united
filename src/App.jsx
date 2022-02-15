@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import NotFound from "./components/NotFound/NotFound";
 import OtherUsers from "./components/OtherUsers/OtherUsers";
 import Posts from "./components/Posts/Posts";
 import PostsUsers from "./components/PostsUser/PostsUser";
@@ -33,7 +34,7 @@ function App() {
         <Route path="/feed" element={<Feed />} />
         <Route path="/profile/*" element={<UserProfile />}/>
         <Route path="/user/:username" element={<User />}/>
-        <Route path ="*" element = {<p>Not Found</p>}/>       
+        <Route path ="*" element = {<NotFound/>}/>       
       </Routes>     
       
     </div>
