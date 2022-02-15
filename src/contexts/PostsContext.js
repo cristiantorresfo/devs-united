@@ -6,6 +6,7 @@ export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -28,6 +29,7 @@ export const PostsProvider = ({ children }) => {
         }
       );
       setPosts(postsData);
+      setIsLoading(false)
     });
 
     return () => {
@@ -36,7 +38,7 @@ export const PostsProvider = ({ children }) => {
   }, [setPosts]);
   
   return (
-    <PostsContext.Provider value={{ posts, setPosts }}>
+    <PostsContext.Provider value={{ posts, setPosts, isLoading, setIsLoading }}>
       {children}
     </PostsContext.Provider>
   );
