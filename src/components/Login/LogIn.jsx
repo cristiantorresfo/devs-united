@@ -17,8 +17,6 @@ function LogIn() {
     return user.uid === userLog.uid;
   });
 
-  console.log(usersfilter);
-
   return (
     <div className="LogInGoogle">
       <p>Lorem, ipsum dolor.</p>

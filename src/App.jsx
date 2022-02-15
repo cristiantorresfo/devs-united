@@ -2,9 +2,6 @@ import { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NotFound from "./components/NotFound/NotFound";
-import OtherUsers from "./components/OtherUsers/OtherUsers";
-import Posts from "./components/Posts/Posts";
-import PostsUsers from "./components/PostsUser/PostsUser";
 import { UserContext } from "./contexts/UserContext";
 import { auth } from "./firebase";
 import Feed from "./pages/Feed/Feed";
@@ -23,20 +20,18 @@ function App() {
     return () => {
       unsubscribeAuth();
     };
-  }, [ setUserLog]);
+  }, [setUserLog]);
 
-  
   return (
     <div className="App">
       <Routes>
         <Route exact path="/" element={<LoggedOut />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/feed" element={<Feed />} />
-        <Route path="/profile/*" element={<UserProfile />}/>
-        <Route path="/user/:username" element={<User />}/>
-        <Route path ="*" element = {<NotFound/>}/>       
-      </Routes>     
-      
+        <Route path="/profile/*" element={<UserProfile />} />
+        <Route path="/user/:username" element={<User />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
