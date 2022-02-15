@@ -1,8 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+@font-face {
+  font-family: silkscreen;
+  src: url("/src/fuentes/slkscrb.ttf");
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 .App {
   display: flex;
   font-family: sans-serif;
@@ -10,8 +19,8 @@
   background-color: #2E132C;
   flex-direction: column;
   overflow-x: hidden;
-  height: 100vh; 
-  
+  height: 100vh;
+
 }
 
 h3 {
@@ -23,10 +32,11 @@ h3 {
   html {
     font-size: 12px;
   }
-  .App{
+
+  .App {
     width: 100vw;
   }
-  
+
 }
 
 @media screen and (max-width: 300px) {
