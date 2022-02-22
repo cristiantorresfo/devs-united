@@ -13,8 +13,8 @@ function LogIn() {
 
   return (
     <div className="LogInGoogle">
-      <p>Lorem, ipsum dolor.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <p>Welcome to Cristian's social network</p>
+      <p>Comparte tus opiniones y pensamientos e interactúa con los posts de los demás usuarios</p>
       <br />
       {userLog.uid.length !== 0 ? (
         <Link to={usersfilter === true ? "/feed" : "/welcome"}>          
@@ -29,7 +29,7 @@ function LogIn() {
         </div>
       )}
 
-      <p>© 2022 Devs_United - <span className="red">BETA</span></p>
+      <p>© 2022 Devs_United - <span className="red">BETA</span> <br /> Created by Cristian Torres</p>
     </div>
   );
 }
