@@ -1,24 +1,14 @@
-import { deletePost, updatePost, updateUser } from "../../firebase";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
 import { useFavoritePost } from "../../hooks/useFavoritePost";
+import { useDeletePost } from "../../hooks/useDeletePost";
 
 function FavoritesPosts() {
   const { users, userLog } = useContext(UserContext);
-  const { posts, setPosts } = useContext(PostsContext);
+  const { posts } = useContext(PostsContext);
   const favoritesPosts = useFavoritePost();
-
-  //funcion para eliminar posts
-  const handlerDelete = (e) => {
-    window.confirm("Are you sure you want to delete this post?") &&
-      deletePost(e.target.id).then((id) => {
-        const newPosts = posts.filter((post) => {
-          return post.id !== id;
-        });
-        setPosts(newPosts);
-      });
-  };
+  const handlerDelete = useDeletePost();
 
   const postsFilterByFavorite = []; //array para guardar posts favoritos
 

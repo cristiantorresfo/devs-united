@@ -3,7 +3,6 @@ import { UserContext } from "../contexts/UserContext";
 import { updatePost, updateUser } from "../firebase";
 
 
-
 export function useFavoritePost() {
 
 const { users, userLog } = useContext(UserContext);

@@ -1,32 +1,23 @@
 import "./Posts.css";
-import { deletePost, updatePost, updateUser } from "../../firebase";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
 import { Link } from "react-router-dom";
 import { useFavoritePost } from "../../hooks/useFavoritePost";
+import { useDeletePost } from "../../hooks/useDeletePost";
 
 function Posts() {
   const { users, userLog, setUidSelected } = useContext(UserContext);
-  const { posts, setPosts } = useContext(PostsContext);
-  const favoritesPosts = useFavoritePost()
-
-  const handlerDelete = (e) => {
-    window.confirm("Are you sure you want to delete this post?") && 
-    deletePost(e.target.id).then((id) => {
-      const newPosts = posts.filter((post) => {
-        return post.id !== id;
-      });
-      setPosts(newPosts);
-    });
-  };
+  const { posts } = useContext(PostsContext);
+  const favoritesPosts = useFavoritePost();
+  const handlerDelete = useDeletePost();
 
   const handleSendUid = (uid) => {
     setUidSelected(uid);
   };
 
   const postsSortByDate = posts.sort((a, b) => b.dateUNIX - a.dateUNIX);
-  
+
   const filterUsersByUid = users.filter((user) => {
     return user.uid === userLog.uid;
   });

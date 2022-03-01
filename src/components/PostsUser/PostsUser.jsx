@@ -2,34 +2,22 @@ import "./PostsUser.css";
 import { useContext } from "react";
 import { PostsContext } from "../../contexts/PostsContext";
 import { UserContext } from "../../contexts/UserContext";
-import { deletePost } from "../../firebase";
 import { useFavoritePost } from "../../hooks/useFavoritePost";
+import { useDeletePost } from "../../hooks/useDeletePost";
 
 function PostsUsers() {
-  const { posts, setPosts } = useContext(PostsContext);
+  const { posts } = useContext(PostsContext);
   const { users, userLog } = useContext(UserContext);
-  const favoritesPosts = useFavoritePost()
+  const favoritesPosts = useFavoritePost();
+  const handlerDelete = useDeletePost();
 
-  //funcion para eliminar posts
-  const handlerDelete = (e) => {
-    window.confirm("Are you sure you want to delete this post?") && 
-    deletePost(e.target.id).then((id) => {
-      const newPosts = posts.filter((post) => {
-        return post.id !== id;
-      });
-      setPosts(newPosts);
-    });
-  };
-
-// obtener posts del usuario loguedao
+  // obtener posts del usuario loguedao
   const postsFiltered = posts.filter((post) => post.uid === userLog.uid);
 
-  //obtener de la coleccion users el que pertenezca al usuario logueado 
+  //obtener de la coleccion users el que pertenezca al usuario logueado
   const filterUsersByUid = users.filter((user) => {
     return user.uid === userLog.uid;
   });
-
-  
 
   return (
     <main className="containerPosts">
