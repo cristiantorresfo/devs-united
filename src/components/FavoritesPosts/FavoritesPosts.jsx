@@ -2,23 +2,28 @@ import { deletePost, updatePost, updateUser } from "../../firebase";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { PostsContext } from "../../contexts/PostsContext";
+import { useFavoritePost } from "../../hooks/useFavoritePost";
 
 function FavoritesPosts() {
   const { users, userLog } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostsContext);
+  const favoritesPosts = useFavoritePost();
 
+  //funcion para eliminar posts
   const handlerDelete = (e) => {
-    window.confirm("Are you sure you want to delete this post?") && 
-    deletePost(e.target.id).then((id) => {
-      const newPosts = posts.filter((post) => {
-        return post.id !== id;
+    window.confirm("Are you sure you want to delete this post?") &&
+      deletePost(e.target.id).then((id) => {
+        const newPosts = posts.filter((post) => {
+          return post.id !== id;
+        });
+        setPosts(newPosts);
       });
-      setPosts(newPosts);
-    });
   };
 
-  const postsFilterByFavorite = [];
+  const postsFilterByFavorite = []; //array para guardar posts favoritos
 
+  //Se recorren los posts que pertenezcan al usuario logueado y se guardan los que
+  // esten incluidos en la base de datos en el campo favorites de la coleccion users.
   users.map((user) => {
     return (
       user.uid === userLog.uid &&
@@ -29,37 +34,6 @@ function FavoritesPosts() {
       })
     );
   });
-
-  const favoritesPosts = (postId, fav) => (e) => {
-    users.map((user) => {
-      user.uid === userLog.uid &&
-        (!user.favorites.includes(postId) ? (
-          <>
-            {user.favorites.push(postId)}
-            {(e.target.src = "../images/corazonFav.svg")}
-          </>
-        ) : (
-          <>
-            {
-              (user.favorites = user.favorites.filter((fav) => {
-                return fav !== postId;
-              }))
-            }
-            {(e.target.src = "../images/corazonUnFav.svg")}
-          </>
-        ));
-
-      return updateUser(user.id, { favorites: user.favorites });
-    });
-
-    !fav.includes(userLog.uid)
-      ? fav.push(userLog.uid)
-      : (fav = fav.filter((fa) => {
-          return fa !== userLog.uid;
-        }));
-
-    return updatePost(postId, { fav: fav, likes: fav.length });
-  };
 
   const filterUsersByUid = users.filter((user) => {
     return user.uid === userLog.uid;

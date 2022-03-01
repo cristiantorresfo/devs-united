@@ -2,12 +2,15 @@ import "./PostsUser.css";
 import { useContext } from "react";
 import { PostsContext } from "../../contexts/PostsContext";
 import { UserContext } from "../../contexts/UserContext";
-import { deletePost, updatePost, updateUser } from "../../firebase";
+import { deletePost } from "../../firebase";
+import { useFavoritePost } from "../../hooks/useFavoritePost";
 
 function PostsUsers() {
   const { posts, setPosts } = useContext(PostsContext);
   const { users, userLog } = useContext(UserContext);
+  const favoritesPosts = useFavoritePost()
 
+  //funcion para eliminar posts
   const handlerDelete = (e) => {
     window.confirm("Are you sure you want to delete this post?") && 
     deletePost(e.target.id).then((id) => {
@@ -18,41 +21,15 @@ function PostsUsers() {
     });
   };
 
+// obtener posts del usuario loguedao
   const postsFiltered = posts.filter((post) => post.uid === userLog.uid);
 
+  //obtener de la coleccion users el que pertenezca al usuario logueado 
   const filterUsersByUid = users.filter((user) => {
     return user.uid === userLog.uid;
   });
 
-  const favoritesPosts = (postId, fav) => (e) => {
-    users.map((user) => {
-      user.uid === userLog.uid &&
-        (!user.favorites.includes(postId) ? (
-          <>
-            {user.favorites.push(postId)}
-            {(e.target.src = "../images/corazonFav.svg")}
-          </>
-        ) : (
-          <>
-            {
-              (user.favorites = user.favorites.filter((fav) => {
-                return fav !== postId;
-              }))
-            }
-            {(e.target.src = "../images/corazonUnFav.svg")}
-          </>
-        ));
-
-      return updateUser(user.id, { favorites: user.favorites });
-    });
-    !fav.includes(userLog.uid)
-      ? fav.push(userLog.uid)
-      : (fav = fav.filter((fa) => {
-          return fa !== userLog.uid;
-        }));
-
-    return updatePost(postId, { fav: fav, likes: fav.length });
-  };
+  
 
   return (
     <main className="containerPosts">
